@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" id="viewport" content="width=device-width, initial-scale=0.5, maximum-scale=1.0,user-scalable=no" > 
+    <title>拼图</title>
+    <!--<script src="js/nav.js"></script>-->
+    <style>
+        *{
+            margin: 0;
+            padding: 0;
+        }
+        #game-container{
+            position: relative;
+            margin: 40px auto;
+            border: 1px solid #1A13C5;
+        }
+        #game-container{
+            background: url(images/wsx.png);
+        }
+        #game{
+            position: absolute;
+            width: 84px;
+            height: 40px;
+            left: 36%;
+            text-align: center;
+            font-size: 16px;
+            line-height: 40px;
+            font-weight: 900;
+            border: 3px solid #C52535;
+            background: #F4FDFF;
+            cursor:pointer;
+            border-radius: 10px;
+        }
+        #refresh{
+            position: absolute;
+            width: 83px;
+            height: 40px;
+            left: 28%;
+            text-align: center;
+            font-size: 16px;
+            line-height: 40px;
+            font-weight: 900;
+            border: 3px solid #C52535;
+            background: #F4FDFF;
+            cursor:pointer;
+            border-radius: 10px;
+        }
+        #game-container .cell,#Original{
+            background-repeat: no-repeat;
+            position: absolute;
+            /*  background-image: url(http://ucren.com/static/locozan/writing/puzzle/imges/girl-001.jpg);*/
+            cursor:pointer;
+
+        }
+        #game-container .cell:hover{
+            z-index: 2;
+            box-shadow: 0 0 3px 2px #74FF65 inset;
+            transition: all .25s ease;
+
+        }
+        #Original{
+            width: 100px;
+            height: 100px;
+            background-repeat: round;
+            border: 1px solid #1A13C5;
+            margin-top: -1.55%;
+            margin-left: 62.2%;
+
+        }
+        #times{
+            position: absolute;
+            font-style: normal;
+            color: #F00;
+        }
+        .time{
+            font-style: normal;
+            position: relative;
+            width: 130px;
+            height: 50px;
+            left: 45%;
+            float: left;
+        }
+        .boxLoading {
+            width: 50px;
+            height: 50px;
+            margin: 200px auto;
+            position: absolute;
+            left: 0;
+            right: 0;
+            top: 0;
+            bottom: 0;
+        }
+        .boxLoading:before {
+            content: '';
+            width: 50px;
+            height: 5px;
+            background: #000;
+            opacity: 0.1;
+            position: absolute;
+            top: 59px;
+            left: 0;
+            border-radius: 50%;
+            animation: shadow .5s linear infinite;
+        }
+        .boxLoading:after {
+            content: '';
+            width: 50px;
+            height: 50px;
+            background: #1A6844;
+            animation: animate .5s linear infinite;
+            position: absolute;
+            top: 0;
+            left: 0;
+            border-radius: 3px;
+        }
+        @media screen and (max-width: 950px){
+            #game{
+                left: 6%;
+                margin-top: -10px;
+            }
+            #refresh{
+                left: 6%;
+                margin-top: 40px;
+            }
+            .time {
+                left: 38%;
+            }
+            #Original {
+                margin-left: 79%;
+            }
+        }
+        @keyframes animate {
+            17% {
+                border-bottom-right-radius: 3px;
+            }
+            25% {
+                transform: translateY(9px) rotate(22.5deg);
+            }
+            50% {
+                transform: translateY(18px) scale(1, 0.9) rotate(45deg);
+                border-bottom-right-radius: 40px;
+            }
+            75% {
+                transform: translateY(9px) rotate(67.5deg);
+            }
+            100% {
+                transform: translateY(0) rotate(90deg);
+            }
+        }
+        @keyframes shadow {
+            0%,
+            100% {
+                transform: scale(1, 1);
+            }
+            50% {
+                transform: scale(1.2, 1);
+            }
+        }
+    </style>
+</head>
+<body onload="winload()">
+<div id="disp" style="width: 100%;position:absolute;background:#FFFFFF; z-index: 9999;font-size: 20px;">
+    <div class="boxLoading">
+        <p style="width: 300px;margin: 85px 0 0 -90px;line-height:0px;">数据加载中，请耐心等待。。。。</p>
+    </div>
+</div>
+<div id="game-container"></div>
+<input id="game" type="button" value="开始游戏">
+<input id="refresh" type="button" value="重载游戏">
+<div id="Original"></div>
+<div class="time">
+    耗时：<input name="showtime" style="color:#ff0000;width:65px;" id="showtime" type="text" value="">
+    图片：<input type="button" id="pickMap" style="color:#ff0000;width:65px;" value="可选图哦">
+    难度：<select id="mode">
+    <option value="2">入门级别</option>
+    <option value="3" selected>经典模式</option>
+    <option value="4">中等模式</option>
+    <option value="5">困难模式</option>
+    <option value="8">地狱级别</option>
+</select>
+</div>
+<script type="text/javascript">
+    var y = document.documentElement.clientHeight;
+    var disp = document.querySelector( '#disp' );
+    disp.style.height = y + 'px';
+    disp.style.lineHeight = y + 'px';
+    setTimeout( function(){
+        disp.style.display = 'none';
+    }, 1500 );
+</script>
+<script charset="utf-8" language="javascript" type="text/javascript" src="js/index.js"></script>
+</body>
+</html>
